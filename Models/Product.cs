@@ -17,11 +17,13 @@ namespace Product_Inventory.Models
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Price")]
+        [Display(Name = "Product Price")]
+        [Range(0.01, double.MaxValue, ErrorMessage ="Price must be 0.01 or greater")]
         public decimal Price { get; set; }
 
         [Required]
         [Display(Name = "Available Quantity")]
+        [Range(0, int.MaxValue, ErrorMessage ="Quantity must be zero or greater")]
         public int Quantity { get; set; }
     }
 }
