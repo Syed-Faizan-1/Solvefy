@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Product_Inventory.Models;
 
 namespace Product_Inventory.Data
 {
@@ -8,5 +9,6 @@ namespace Product_Inventory.Data
         {
             
         }
+        public DbSet<Product> Products { get; set; }
     }
 }
