@@ -27,6 +27,7 @@ namespace Product_Inventory.Controllers
             {
                 _db.Products.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Product Created Successfully!";
                 return RedirectToAction("Index", "Product");
             }
             return View();
@@ -53,6 +54,7 @@ namespace Product_Inventory.Controllers
             {
                 _db.Products.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Product Edited Successfully!";
                 return RedirectToAction("Index", "Product");
             }
             return View();
@@ -81,6 +83,7 @@ namespace Product_Inventory.Controllers
             }
             _db.Products.Remove(p);
             _db.SaveChanges();
+            TempData["success"] = "Product Deleted Successfully!";
             return RedirectToAction("Index", "Product");
         }
     }
