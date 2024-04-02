@@ -1,1 +1,36 @@
-﻿<h1>Products</h1>
+﻿@model List<Product>
+<div class="container">
+    <div class="row pt-4 pb-4">
+        <div class="col-6">
+           <h2>
+               Products List
+           </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="" asp-action="" class="btn btn-outline-dark"> 
+                Create New
+            </a>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.OrderBy(u => u.Id))
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Description</td>
+                    <td>@obj.Price $</td>
+                    <td>@obj.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
