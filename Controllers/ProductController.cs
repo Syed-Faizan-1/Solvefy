@@ -31,5 +31,57 @@ namespace Product_Inventory.Controllers
             }
             return View();
         }
+
+        public IActionResult Edit(int? productId)
+        {
+            if(productId == null || productId == 0)
+            {
+                return NotFound();
+            }
+            Product? p = _db.Products.FirstOrDefault(p => p.Id == productId);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            return View(p);
+
+        }
+        [HttpPost]
+        public IActionResult Edit(Product obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Products.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Product");
+            }
+            return View();
+        }
+        public IActionResult Delete(int? productId)
+        {
+            if (productId == null || productId == 0)
+            {
+                return NotFound();
+            }
+            Product? p = _db.Products.FirstOrDefault(p => p.Id == productId);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            return View(p);
+
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Product? p = _db.Products.Find(id);
+            if(p == null)
+            {
+                return NotFound();
+            }
+            _db.Products.Remove(p);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Product");
+        }
     }
 }
