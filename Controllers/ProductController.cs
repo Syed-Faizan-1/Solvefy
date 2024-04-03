@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Product_Inventory.Data;
-using Product_Inventory.Models;
+using ProductInventory.Data;
+using ProductInventory.Models;
 
-namespace Product_Inventory.Controllers
+namespace ProductInventory.Controllers
 {
     public class ProductController : Controller
     {

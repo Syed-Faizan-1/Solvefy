@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Product_Inventory.Data;
+using ProductInventory.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

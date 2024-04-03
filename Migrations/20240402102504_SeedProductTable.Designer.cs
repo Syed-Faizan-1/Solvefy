@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Product_Inventory.Data;
+using ProductInventory.Data;
 
 #nullable disable
 
-namespace Product_Inventory.Migrations
+namespace ProductInventory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240402102504_SeedProductTable")]
@@ -24,7 +24,7 @@ namespace Product_Inventory.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Product_Inventory.Models.Product", b =>
+            modelBuilder.Entity("ProductInventory.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

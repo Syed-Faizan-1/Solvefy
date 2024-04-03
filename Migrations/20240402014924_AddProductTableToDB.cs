@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Product_Inventory.Migrations
+namespace ProductInventory.Migrations
 {
     /// <inheritdoc />
     public partial class AddProductTableToDB : Migration

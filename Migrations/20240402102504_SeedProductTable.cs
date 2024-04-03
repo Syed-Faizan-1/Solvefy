@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Product_Inventory.Migrations
+namespace ProductInventory.Migrations
 {
     /// <inheritdoc />
     public partial class SeedProductTable : Migration
