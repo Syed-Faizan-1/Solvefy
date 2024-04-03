@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ProductInventory.Models;
 
 namespace ProductInventory.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext: IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {
@@ -13,6 +14,7 @@ namespace ProductInventory.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Product>().HasData(
                 new Product { Id = 1, Name = "Car", Description = "Brand New Car", Price = 20000, Quantity = 20 },
                 new Product { Id = 2, Name = "Bike", Description = "Brand New Bike", Price = 20000, Quantity = 20 },
