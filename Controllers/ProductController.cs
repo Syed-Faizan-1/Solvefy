@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Product_Inventory;
 using ProductInventory.Data;
 using ProductInventory.Models;
 
 namespace ProductInventory.Controllers
 {
+    [Authorize(Roles = Constants.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
