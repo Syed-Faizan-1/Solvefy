@@ -20,6 +20,7 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Image</th>
                 <th></th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td>@obj.Description</td>
                     <td>@obj.Price $</td>
                     <td>@obj.Quantity</td>
+                    <td><img src="@obj.ImageUrl" class="img-fluid" style="max-width: 100px; max-height: 100px;" alt="Product Image"></td>
                     <td>
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-outline-primary mx-2">
