@@ -11,10 +11,10 @@ namespace ProductInventory.Models
 
         [Required]
         [Display(Name = "Product Name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Display(Name = "Product Description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         [Display(Name = "Product Price")]
@@ -25,7 +25,6 @@ namespace ProductInventory.Models
         [Display(Name = "Available Quantity")]
         [Range(0, int.MaxValue, ErrorMessage ="Quantity must be zero or greater")]
         public int Quantity { get; set; }
-        [Required]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
