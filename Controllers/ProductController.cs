@@ -11,9 +11,11 @@ namespace ProductInventory.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public ProductController(ApplicationDbContext db)
+        private readonly IWebHostEnvironment _environment;
+        public ProductController(ApplicationDbContext db, IWebHostEnvironment environment)
         {
             _db = db;
+            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -34,10 +36,29 @@ namespace ProductInventory.Controllers
             return View(p);
         }
         [HttpPost]
-        public IActionResult Upsert(Product obj)
+        public IActionResult Upsert(Product obj, IFormFile? file)
         {
-            if(ModelState.IsValid)
+            foreach (var modelStateEntry in ModelState.Values)
             {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                string wwwRootPath = _environment.WebRootPath;
+                if(file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"Images\Product");
+
+                    using(var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    obj.ImageUrl = @"\Images\Product\" + fileName;
+                }
                 _db.Products.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Product Created Successfully!";
@@ -46,13 +67,13 @@ namespace ProductInventory.Controllers
             return View();
         }
 
-        public IActionResult Delete(int? productId)
+        public IActionResult Delete(int? id)
         {
-            if (productId == null || productId == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            Product? p = _db.Products.FirstOrDefault(p => p.Id == productId);
+            Product? p = _db.Products.FirstOrDefault(p => p.Id == id);
             if (p == null)
             {
                 return NotFound();
