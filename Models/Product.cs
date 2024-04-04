@@ -25,5 +25,7 @@ namespace ProductInventory.Models
         [Display(Name = "Available Quantity")]
         [Range(0, int.MaxValue, ErrorMessage ="Quantity must be zero or greater")]
         public int Quantity { get; set; }
+        [Required]
+        public string ImageUrl { get; set; }
     }
 }
