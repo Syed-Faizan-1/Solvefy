@@ -11,11 +11,11 @@
                         <div class="pl-1">
                             <p class="card-title h5 text-dark opacity-75 text-uppercase text-center"><strong>@product.Name</strong></p>
                             <p class="card-title h5 text-warning">@product.Description</p>
-                            <p class="card-title h5 text-dark opacity-75"><strong>Price: </strong>@product.Price $</p>
+                            <p class="card-title h5 text-dark opacity-75"><strong>Price: </strong>@product.Price.ToString("c")</p>
                             <p class="card-title h5 text-dark opacity-75"><strong>Quantity: </strong>@product.Quantity</p>
                         </div>
                         <div>
-                            <a href="#" class="btn btn-secondary bg-gradient border-0 form-control">
+                            <a asp-controller="Home" asp-action="Details" asp-route-id="@product.Id" class="btn btn-secondary bg-gradient border-0 form-control">
                                 Details
                             </a>
                         </div>

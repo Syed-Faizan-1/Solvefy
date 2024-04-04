@@ -21,6 +21,15 @@ namespace ProductInventory.Controllers
             IEnumerable<Product> productList = _db.Products;
             return View(productList);
         }
+        public IActionResult Details(int id)
+        {
+            Product? product = _db.Products.FirstOrDefault(x => x.Id == id);
+            if(product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
 
         public IActionResult Privacy()
         {
