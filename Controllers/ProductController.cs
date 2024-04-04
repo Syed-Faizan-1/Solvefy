@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Product_Inventory;
 using ProductInventory.Data;
 using ProductInventory.Models;
@@ -19,12 +20,21 @@ namespace ProductInventory.Controllers
             var productList = _db.Products.ToList();
             return View(productList);
         }
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            if(id == null)
+            {
+                return View();
+            }
+            Product? p = _db.Products.FirstOrDefault(p => p.Id == id);
+            if (p == null)
+            {
+                return NotFound();
+            }
+            return View(p);
         }
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Upsert(Product obj)
         {
             if(ModelState.IsValid)
             {
@@ -36,32 +46,6 @@ namespace ProductInventory.Controllers
             return View();
         }
 
-        public IActionResult Edit(int? productId)
-        {
-            if(productId == null || productId == 0)
-            {
-                return NotFound();
-            }
-            Product? p = _db.Products.FirstOrDefault(p => p.Id == productId);
-            if (p == null)
-            {
-                return NotFound();
-            }
-            return View(p);
-
-        }
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Products.Update(obj);
-                _db.SaveChanges();
-                TempData["success"] = "Product Edited Successfully!";
-                return RedirectToAction("Index", "Product");
-            }
-            return View();
-        }
         public IActionResult Delete(int? productId)
         {
             if (productId == null || productId == 0)
