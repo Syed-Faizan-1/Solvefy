@@ -52,14 +52,29 @@ namespace ProductInventory.Controllers
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"Images\Product");
-
+                    if(obj.ImageUrl != null)
+                    {
+                        //delete the old image
+                        var oldImagePath = Path.Combine(wwwRootPath, obj.ImageUrl.TrimStart('\\'));
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
                     using(var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
                     obj.ImageUrl = @"\Images\Product\" + fileName;
                 }
-                _db.Products.Add(obj);
+                if(obj.Id == 0)
+                {
+                    _db.Products.Add(obj);
+                }
+                else
+                {
+                    _db.Products.Update(obj);
+                }
                 _db.SaveChanges();
                 TempData["success"] = "Product Created Successfully!";
                 return RedirectToAction("Index", "Product");
